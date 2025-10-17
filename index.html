@@ -1,0 +1,35 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  #weather {
+    font-size: 2em;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#getWeather").click(function(){
+    var city = $("#city").val();
+    var apiKey = "Your Open Weather API Key Here";
+    var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+    $.getJSON(url, function(data){
+      $("#weather").html(data.weather[0].main + " in " + data.name);
+    });
+  });
+});
+</script>
+</head>
+<body>
+  <h1>Simple Weather App</h1>
+  <input type="text" id="city" placeholder="Enter city name">
+  <button id="getWeather">Get Weather</button>
+  <p id="weather"></p>
+</body>
+</html>
